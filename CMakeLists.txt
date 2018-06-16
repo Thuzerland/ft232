@@ -18,6 +18,14 @@ set(CMAKE_PREFIX_PATH "${QT_CMAKE_DIR}")
 # Find the QtWidgets library
 find_package(Qt5Widgets CONFIG REQUIRED)
 
+# External library directories
+if(APPLE)
+    set(LIB_DIR ${CMAKE_SOURCE_DIR}/lib/macos)
+else()
+    set(LIB_DIR ${CMAKE_SOURCE_DIR}/lib/linux)
+endif()
+link_directories(${LIB_DIR})
+
 # Populate a CMake variable with the sources
 set(FT232_SRCS
         mainwindow.ui
@@ -25,9 +33,14 @@ set(FT232_SRCS
         main.cpp
         USBBus.cpp
         USBDevice.cpp)
-# Tell CMake to create the helloworld executable
+# Create executable
 add_executable(FT232 ${FT232_SRCS})
-# Use the Widgets module from Qt 5
+
+set(LIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/lib/include)
+target_include_directories(FT232 PUBLIC ${LIB_INCLUDE_DIR})
+
+# Link with libraries
 target_link_libraries(FT232
         Qt5::Widgets
-        usb-1.0)
+        usb-1.0
+        ftd2xx)
