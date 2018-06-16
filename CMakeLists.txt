@@ -20,14 +20,14 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 
 # Populate a CMake variable with the sources
 set(FT232_SRCS
-    	mainwindow.ui
-    	mainwindow.cpp
-    	main.cpp
-		USBBus.cpp
-		USBDevice.cpp)
+        mainwindow.ui
+        mainwindow.cpp
+        main.cpp
+        USBBus.cpp
+        USBDevice.cpp)
 # Tell CMake to create the helloworld executable
 add_executable(FT232 ${FT232_SRCS})
 # Use the Widgets module from Qt 5
 target_link_libraries(FT232
-		Qt5::Widgets
+        Qt5::Widgets
         usb-1.0)
