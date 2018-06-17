@@ -1,5 +1,8 @@
 #include <stdio.h>
+#include <unistd.h>
+
 #include <libusb-1.0/libusb.h>
+#include <ftd2xx.h>
 
 #include "USBBus.h"
 
@@ -11,19 +14,6 @@ USBBus::USBBus()
 
     rc = libusb_init(&this->libusb_ctx);
     assert(rc == 0);
-
-//    count = libusb_get_device_list(this->libusb_ctx, &list);
-//    assert(count > 0);
-//
-//    for (size_t idx = 0; idx < count; ++idx) {
-//        libusb_device *device = list[idx];
-//        libusb_device_descriptor desc = {0};
-//
-//        rc = libusb_get_device_descriptor(device, &desc);
-//        assert(rc == 0);
-//
-//        printf("Vendor:Device = %04x:%04x\n", desc.idVendor, desc.idProduct);
-//    }
 }
 
 USBBus::~USBBus()
@@ -34,7 +24,6 @@ USBBus::~USBBus()
 int USBBus::enumerateDevices(USBDevice ***devices, size_t *cnt)
 {
     ssize_t count;
-    int rc = 0;
 
     count = libusb_get_device_list(this->libusb_ctx, &list);
     assert(count > 0);
@@ -55,4 +44,16 @@ int USBBus::enumerateDevices(USBDevice ***devices, size_t *cnt)
     }
 
     return 0;
+}
+
+int USBBus::enumerateFT232()
+{
+    FT_STATUS ftStatus;
+    DWORD numDevs;
+
+
+    ftStatus = FT_ListDevices(&numDevs, NULL, FT_LIST_NUMBER_ONLY);
+    assert(ftStatus == FT_OK);
+
+    return numDevs;
 }

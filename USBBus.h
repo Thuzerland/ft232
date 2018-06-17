@@ -10,6 +10,7 @@ public:
     USBBus();
 
     int enumerateDevices(USBDevice ***devices, size_t *cnt);
+    int enumerateFT232();
 
     virtual ~USBBus();
 

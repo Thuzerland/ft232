@@ -32,7 +32,8 @@ set(FT232_SRCS
         mainwindow.cpp
         main.cpp
         USBBus.cpp
-        USBDevice.cpp)
+        USBDevice.cpp
+        FT232.cpp)
 # Create executable
 add_executable(FT232 ${FT232_SRCS})
 

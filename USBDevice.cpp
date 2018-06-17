@@ -18,7 +18,8 @@ QString USBDevice::toString()
 
     rc = libusb_get_device_descriptor(device, &desc);
     assert(rc == 0);
-    description = (desc.idVendor == FTDI_DEFAULT_VID) && (desc.idProduct == FT232H_DEFAULT_PID) ? " <-- FT232" : "";
+    /* Lets check only by PID for test purposes. */
+    description = (desc.idVendor == FTDI_DEFAULT_VID)/* && (desc.idProduct == FT232H_DEFAULT_PID) */? " <-- FT232" : "";
     sprintf(buf, "%04x:%04x%s", desc.idVendor, desc.idProduct, description);
 
     return QString(buf);
