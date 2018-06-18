@@ -1,5 +1,7 @@
 #include "FT232.h"
 
+#include <assert.h>
+
 #define MAX_PIN_NUMBER  4 /* FT232R has only 4 CBUS pins */
 
 #define FT_BIT_BANG_CBUS_MODE  0x20

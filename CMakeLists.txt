@@ -10,7 +10,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
 # Path to QT instalation dir 
-set(QT_CMAKE_DIR "/Users/Oleg/Qt/5.10.0/clang_64/lib/cmake")
+set(QT_CMAKE_DIR "/home/vinnik/Qt5.7.0/5.7/gcc_64/lib/cmake")
 
 # Add QT to path
 set(CMAKE_PREFIX_PATH "${QT_CMAKE_DIR}")
@@ -37,11 +37,14 @@ set(FT232_SRCS
 # Create executable
 add_executable(FT232 ${FT232_SRCS})
 
+set(CMAKE_CXX_FLAGS " -pthread " )
+
 set(LIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/lib/include)
 target_include_directories(FT232 PUBLIC ${LIB_INCLUDE_DIR})
 
 # Link with libraries
 target_link_libraries(FT232
+        ftd2xx
         Qt5::Widgets
         usb-1.0
-        ftd2xx)
+        )

@@ -1,4 +1,5 @@
 #include <libusb-1.0/libusb.h>
+#include <assert.h>
 #include "USBDevice.h"
 
 #define FTDI_DEFAULT_VID     0x0403

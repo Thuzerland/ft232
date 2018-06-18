@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <assert.h>
 
 #include <libusb-1.0/libusb.h>
 #include <ftd2xx.h>
